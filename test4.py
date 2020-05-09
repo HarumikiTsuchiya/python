@@ -6,6 +6,8 @@ str1 = ['a','b','c']
 str2 = ['a','b']
 str3 = ['test']
 
+#aaaa
+
 print(list(set(nums1) | set(nums2)))
 print(list(set(nums1) - set(nums2)))
 
