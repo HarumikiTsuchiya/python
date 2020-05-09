@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ja">
+<body>
+<head>
+  <meta charset="utf-8">
+　<title>グラフ</title> 
+
+  <script type="text/javascript">
+     
+      var dataPoints = [];
+        
+      function getDataPointsFromCSV1(csv) 
+      {
+        var dataPoints = csvLines = points = [];
+        csvLines = csv.split(/[\r?\n|\r|\n]+/);         
+                    
+        for (var i = 0; i < csvLines.length; i++)
+          if (csvLines[i].length > 0) 
+          {
+            points = csvLines[i].split(",");
+            dataPoints.push
+            (
+              { 
+                x: parseFloat(points[2]), 
+                y: parseFloat(points[3])                
+              }
+            );
+          }
+          return dataPoints
+        ;
+
+      }
+
+    function getLastData()
+    {
+
+      var req = new XMLHttpRequest();
+      req.open("get", "./LOG/DAT_newest.csv", true);
+      req.send(null);
+
+      req.onload = function()
+      {
+        convertCSVtoArray(req.responseText);
+      }
+
+    }
+
+    function convertCSVtoArray(str)
+    {
+        var tmp = str.split(",");
+        document.getElementById('LastDateTime').innerHTML="更新日時: "+tmp[1];
+        document.getElementById('LastData1').innerHTML= tmp[3]+"℃";
+        document.getElementById('LastData2').innerHTML= tmp[4]+"％";
+        document.getElementById('LastData3').innerHTML= tmp[5]+"hPa";
+    }
+
+
+  </script>
+</head>
+
+
+  <h1>折れ線グラフ</h1>
+
+  <script>
+    getLastData()
+  </script>
+
+  <div id="LastDateTime"> </div>
+  <div id="LastData1"> </div>
+  <div id="LastData2"> </div>
+  <div id="LastData3"> </div>
+  
+
+</body>
+
+</html>
